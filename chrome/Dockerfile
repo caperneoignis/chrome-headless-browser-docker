@@ -2,7 +2,7 @@ FROM debian:stable-slim
 # FROM ubuntu:xenial
 # FROM google/debian:jessie
 
-MAINTAINER Albert Yu <yukinying@gmail.com>
+MAINTAINER Lee K.
 
 ARG DEBIAN_FRONTEND=noninteractive
 
