@@ -1,6 +1,6 @@
-FROM yukinying/chrome-headless-browser:latest
+FROM caperneoignis/chrome-headless-browser:latest
 
-MAINTAINER Albert Yu <yukinying@gmail.com>
+MAINTAINER Lee Kirkland
 
 ARG DEBIAN_FRONTEND=noninteractive
 
