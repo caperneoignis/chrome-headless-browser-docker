@@ -53,7 +53,3 @@ docker run --init -it --rm --name chrome --shm-size=1024m -p=127.0.0.1:9222:9222
 ## Getting More Verbose Output
 
 Try adding the following flag: `--enable-logging --v=10000`
-
-## Headless Shell
-
-If you would like to use `headless_shell` instead of `chrome --headless` in Docker, please check out https://github.com/yukinying/chrome-headless-travis-build.
