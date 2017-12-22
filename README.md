@@ -8,10 +8,6 @@ This repository contains two docker builds.
 
 This docker image contain the Linux Dev channel Chromium (https://www.chromium.org/getting-involved/dev-channel), with the required dependencies and the command line argument running headless mode provided.
 
-## Chrome Headless Browser with Chrome Driver in Selenium
-
-Credits to SeleniumHQ https://github.com/SeleniumHQ/docker-selenium. The Dockerfile and configuration are taken from their repository, with modification to use google-chrome and removing unnecessary dependencies.
-
 ---
 
 ## How to run the container:
@@ -57,29 +53,6 @@ docker run --init -it --rm --name chrome --shm-size=1024m -p=127.0.0.1:9222:9222
 ## Getting More Verbose Output
 
 Try adding the following flag: `--enable-logging --v=10000`
-
-## How to run the container with Selenium:
-
-Standalone mode:
-```
-docker run -it --rm --name chrome --shm-size=1024m --cap-add=SYS_ADMIN \
-  -p=127.0.0.1:4444:4444 \
-  caperneoigins/chrome-headless-browser-selenium
-```
-
-Node mode:
-```
-# First, start your hub.
-docker run -it --rm --name hub \
-  -p=127.0.0.1:4444:4444 \
-  selenium/hub
-
-# Then run your node by registering it to the hub
-docker run -it --rm --name node-chrome --link hub:hub --cap-add=SYS_ADMIN \
-  caperneoignis/chrome-headless-browser-selenium \
-  -role node -hub http://hub:4444/grid/register \
-  -nodeConfig /opt/selenium/config.json
-```
 
 ## Headless Shell
 
