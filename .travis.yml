@@ -7,13 +7,12 @@ services:
 language: bash
 
 env:
-  - REPO=caperneoignis/chrome-headless-browser DIR=chrome
-  - REPO=caperneoignis/chrome-headless-browser-selenium DIR=chromedriver
+  - REPO=caperneoignis/chrome-headless-browser
 
 before_install:
   - export VERSION0=`docker run --name chrome --rm --entrypoint=/usr/bin/google-chrome-stable $REPO --version | grep -Po '(?<=Google Chrome )[^ ]+'`
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - docker build -t $REPO $DIR
+  - docker build -t $REPO .
 
 script:
   - export VERSION1=`docker run --name chrome --rm --entrypoint=/usr/bin/google-chrome-stable $REPO --version | grep -Po '(?<=Google Chrome )[^ ]+'`
