@@ -2,6 +2,8 @@
 
 This repository contains two docker builds.
 
+https://travis-ci.org/caperneoignis/chrome-headless-browser-docker.svg?branch=master
+
 ## Chrome Headless Browser
 
 This docker image contain the Linux Dev channel Chromium (https://www.chromium.org/getting-involved/dev-channel), with the required dependencies and the command line argument running headless mode provided.
