@@ -1,5 +1,5 @@
 # special thanks to
-[justinribeiro](https://github.com/justinribeiro/dockerfiles/tree/master/chrome-headless) I used his MakeFile with the test script that post the version informaiton. 
+[justinribeiro](https://github.com/justinribeiro/dockerfiles/tree/master/chrome-headless) I used his MakeFile with the  test script I had acquired from the forked repo that post the version informaiton. 
 
 # chrome-headless-browser-docker
 
