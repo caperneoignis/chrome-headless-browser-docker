@@ -35,12 +35,10 @@ There are two mitigations, but none of them are ideal as it gives the container 
 
 1. Use a special seccomp profile, as stated in https://twitter.com/jessfraz/status/681934414687801345
 ```
-docker run --init -it --rm --name chrome --shm-size=1024m -p=127.0.0.1:9222:9222 --security-opt seccomp:/path/to/chrome.json \
-  caperneoignis/chrome-headless-browser
+docker run -d --name chrome -p=127.0.0.1:9222:9222 --security-opt seccomp:/path/to/chrome.json caperneoignis/chrome-headless-browser
 ```
 
 2. Use CAP_SYS_ADMIN
 ```
-docker run --init -it --rm --name chrome --shm-size=1024m -p=127.0.0.1:9222:9222 --name chrome --cap-add=SYS_ADMIN \
-  caperneoignis/chrome-headless-browser
+docker run -d --name chrome -p=127.0.0.1:9222:9222 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
 ```
