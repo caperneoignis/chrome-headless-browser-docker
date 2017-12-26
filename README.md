@@ -1,6 +1,6 @@
 # chrome-headless-browser-docker
 
-This repository contains two docker builds.
+This repository contains one docker builds.
 
 [![Build Status](https://travis-ci.org/caperneoignis/chrome-headless-browser-docker.svg?branch=master)](https://travis-ci.org/caperneoignis/chrome-headless-browser-docker)
 
