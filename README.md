@@ -1,8 +1,12 @@
+# special thanks to
+[yukinying](https://github.com/yukinying/chrome-headless-browser-docker) I used his MakeFile with the test script that post the version informaiton. 
+
 # chrome-headless-browser-docker
 
 This repository contains one docker builds.
 
 [![Build Status](https://travis-ci.org/caperneoignis/chrome-headless-browser-docker.svg?branch=master)](https://travis-ci.org/caperneoignis/chrome-headless-browser-docker)
+
 
 ## Chrome Headless Browser
 
