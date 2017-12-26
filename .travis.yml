@@ -10,18 +10,26 @@ env:
   - REPO=caperneoignis/chrome-headless-browser
 
 before_install:
-  - export VERSION0=`docker run -d --name chrome $REPO --version | grep -Po '(?<=Google Chrome )[^ ]+'`
+  # run the previous version if needed.
+  - VERSION0=`docker run -d --name chrome $REPO`
+  #we want the version information, so run the image then do an exec command
+  - VERSION0=`docker exec $VERSION0 google-chrome-stable --version`
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - docker build -t $REPO .
 
 script:
-  - export VERSION1=`docker run -d --name chrome $REPO --version | grep -Po '(?<=Google Chrome )[^ ]+'`
+  - VERSION1=`docker run -d --name chrome $REPO`
+  #we want the version information, so run the image then do an exec command
+  - VERSION1=`docker exec $VERSION1 google-chrome-stable --version`
   - docker tag $REPO $REPO:latest
   - docker tag $REPO $REPO:$VERSION1
   - docker run --name chrome -d --cap-add=SYS_ADMIN $REPO:latest --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$VERSION0" != "$VERSION1" ]; then
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push $REPO;
     fi
+    
+after_script:
+  - docker stop $VERSION0 $VERSION1 && docker rm $VERSION0 $VERSION1
