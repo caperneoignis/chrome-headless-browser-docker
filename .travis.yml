@@ -21,7 +21,7 @@ script:
   - VERSION1=`docker exec chrome1 google-chrome-stable --version | grep -Po '(?<=Google Chrome )[^ ]+'`
   - docker tag $REPO $REPO:${VERSION1}_apache
   - docker tag $REPO $REPO:latest_apache
-  - docker run --name chrome -e APACHE_WEB_ROOT  -d --cap-add=SYS_ADMIN $REPO:$VERSION1$APACHEADD --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
+  - docker run --name chrome -e APACHE_WEB_ROOT  -d --cap-add=SYS_ADMIN $REPO:${VERSION1}_apache --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
 
 after_success:
   - docker push $REPO;
