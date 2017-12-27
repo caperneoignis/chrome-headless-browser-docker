@@ -53,5 +53,5 @@ USER chrome
 EXPOSE 9222
 
 # Autorun chrome headless with no GPU
-ENTRYPOINT [ "google-chrome-stable" ]
+ENTRYPOINT [ "/bin/bash", "google-chrome-stable" ]
 CMD [ "--headless", "--disable-gpu", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222" ]
