@@ -18,9 +18,12 @@ script:
   - docker run -d -e APACHE_WEB_ROOT --name chrome1 $REPO
   #we want the version information, so run the image then do an exec command
   - VERSION1=`docker exec chrome1 google-chrome-stable --version | grep -Po '(?<=Google Chrome )[^ ]+'`
-  - docker tag $REPO $REPO:${VERSION1}_apache
-  - docker tag $REPO $REPO:latest_apache
-  - docker run --name chrome -e APACHE_WEB_ROOT  -d --cap-add=SYS_ADMIN $REPO:${VERSION1}_apache --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
+  - VERSIONString = "$VERSION1"
+  - APACHEADD = "_apache"
+  - LATEST = "latest"
+  - docker tag $REPO $REPO:$VERSION1$APACHEADD
+  - docker tag $REPO $REPO:$latest$APACHEADD
+  - docker run --name chrome -e APACHE_WEB_ROOT  -d --cap-add=SYS_ADMIN $REPO:$VERSION1$APACHEADD --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
