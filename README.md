@@ -5,7 +5,7 @@
 
 This repository contains one docker builds.
 
-[![Build Status](https://travis-ci.org/caperneoignis/chrome-headless-browser-docker.svg?branch=master)](https://travis-ci.org/caperneoignis/chrome-headless-browser-docker)
+[![Build Status](https://travis-ci.org/caperneoignis/chrome-headless-browser-docker.svg?branch=apache)](https://travis-ci.org/caperneoignis/chrome-headless-browser-docker)
 
 
 ## Chrome Headless Browser
@@ -18,9 +18,12 @@ This docker image contain the Linux Dev channel Chromium (https://www.chromium.o
 
 To run the container with remote-debugging:
 ```
-docker run -d -p 9222:9222 --cap-add=SYS_ADMIN caperneoignis/chrome-headless
+docker run -d -p 9222:9222 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
 ```
-
+To run the container with remote-debugging and apache:
+```
+docker run -d -p 9222:9222 -e APACHE_WEB_ROOT=/some/directory --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
+```
 See the following sections for alternate ways to start the container.
 
 ## Why cap-add=SYS_ADMIN is needed
