@@ -32,4 +32,4 @@ after_success:
     fi
     
 after_script:
-  - docker stop chrome0 chrome1 && docker rm chrome0 chrome1
+  - docker stop chrome chrome0 chrome1 && docker rm chrome chrome0 chrome1
