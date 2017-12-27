@@ -11,17 +11,10 @@
 #     wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json -O ~/chrome.json
 #
 #
-# To run (without seccomp):
-# docker run -d -p 9222:9222 --cap-add=SYS_ADMIN justinribeiro/chrome-headless
-# 
-# To run a better way (with seccomp):
-# docker run -d -p 9222:9222 --security-opt seccomp=$HOME/chrome.json justinribeiro/chrome-headless 
-#
-# Basic use: open Chrome, navigate to http://localhost:9222/
 #
 
 # Base docker image
-FROM debian:sid
+FROM caperneoignis/moodle-php-apache:7.1
 LABEL name="chrome-headless" \ 
 			maintainer="Lee K." \
 			version="1.4" \

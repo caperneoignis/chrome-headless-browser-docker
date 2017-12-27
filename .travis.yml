@@ -11,9 +11,6 @@ env:
 
 before_install:
   # run the previous version if needed.
-  - docker run -d --name chrome0 $REPO
-  #we want the version information, so run the image then do an exec command
-  - VERSION0=`docker exec chrome0 google-chrome-stable --version | grep -Po '(?<=Google Chrome )[^ ]+'`
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - docker build -t $REPO .
 
@@ -21,8 +18,7 @@ script:
   - docker run -d --name chrome1 $REPO
   #we want the version information, so run the image then do an exec command
   - VERSION1=`docker exec chrome1 google-chrome-stable --version | grep -Po '(?<=Google Chrome )[^ ]+'`
-  - docker tag $REPO $REPO:latest
-  - docker tag $REPO $REPO:$VERSION1
+  - docker tag $REPO $REPO:${VERSION1}_apache
   - docker run --name chrome -d --cap-add=SYS_ADMIN $REPO:latest --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
 
 after_success:
@@ -32,4 +28,4 @@ after_success:
     fi
     
 after_script:
-  - docker stop chrome0 chrome1 && docker rm chrome0 chrome1
+  - docker stop chrome1 && docker rm chrome1
