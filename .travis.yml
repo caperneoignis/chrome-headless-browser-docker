@@ -7,8 +7,7 @@ services:
 language: bash
 
 env:
-  - REPO=caperneoignis/chrome-headless-browser
-  - APACHE_WEB_ROOT=$PWD
+  - REPO=caperneoignis/chrome-headless-browser APACHE_WEB_ROOT=$PWD
 
 before_install:
   # run the previous version if needed.
