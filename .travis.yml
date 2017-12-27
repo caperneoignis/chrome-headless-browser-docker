@@ -8,6 +8,7 @@ language: bash
 
 env:
   - REPO=caperneoignis/chrome-headless-browser
+  - APACHE_WEB_ROOT=$PWD
 
 before_install:
   # run the previous version if needed.
@@ -15,11 +16,11 @@ before_install:
   - docker build -t $REPO .
 
 script:
-  - docker run -d --name chrome1 $REPO
+  - docker run -d -e APACHE_WEB_ROOT --name chrome1 $REPO
   #we want the version information, so run the image then do an exec command
   - VERSION1=`docker exec chrome1 google-chrome-stable --version | grep -Po '(?<=Google Chrome )[^ ]+'`
   - docker tag $REPO $REPO:${VERSION1}_apache
-  - docker run --name chrome -d --cap-add=SYS_ADMIN $REPO:latest --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
+  - docker run --name chrome -e APACHE_WEB_ROOT  -d --cap-add=SYS_ADMIN $REPO:latest --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
@@ -28,4 +29,4 @@ after_success:
     fi
     
 after_script:
-  - docker stop chrome1 && docker rm chrome1
+  - docker stop chrome chrome1 && docker rm chrome chrome1
