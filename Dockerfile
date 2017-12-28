@@ -34,8 +34,7 @@ RUN apt-get update && apt-get install -y \
 	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-get update && apt-get install -y \
 	google-chrome-stable \
-	#supervisor \
-	#python2.7 \
+	supervisor \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -54,7 +53,8 @@ COPY files/supervisord.conf /etc/supervisord.conf
 COPY files/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["bash"]
+WORKDIR /
+
+ENTRYPOINT [ "/entrypoint.sh", "bash"]
 

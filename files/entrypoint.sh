@@ -10,7 +10,7 @@ else
     sed -i "s#<<APACHE_WEB_ROOT>>#${APACHE_WEB_ROOT}#" /etc/apache2/sites-enabled/000-default.conf
 fi
 
-/usr/bin/supervisord -n -c /etc/supervisord.conf > /dev/null 2>&1 &
+/usr/bin/supervisord -c /etc/supervisord.conf
 
 if [[ $# -eq 1 && $1 == "bash" ]]; then
     $@
