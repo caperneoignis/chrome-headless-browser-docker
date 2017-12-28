@@ -15,6 +15,9 @@
 
 # Base docker image
 FROM caperneoignis/moodle-php-apache:7.1
+
+ENV APACHE_WEB_ROOT="/var/www/html"
+
 LABEL name="chrome-headless" \ 
 			maintainer="Lee K." \
 			version="1.4" \
@@ -31,19 +34,27 @@ RUN apt-get update && apt-get install -y \
 	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-get update && apt-get install -y \
 	google-chrome-stable \
+	#supervisor \
+	#python2.7 \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Add Chrome as a user
-RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
-    && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
+#RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+#    && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
 
 # Run Chrome non-privileged
-USER chrome
+#USER chrome
 
 # Expose port 9222
 EXPOSE 9222
 
-# Autorun chrome headless with no GPU
-ENTRYPOINT [ "/bin/bash", "google-chrome-stable" ]
-CMD [ "--headless", "--disable-gpu", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222" ]
+COPY files/supervisord.conf /etc/supervisord.conf
+
+COPY files/entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["bash"]
+
