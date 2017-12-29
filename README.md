@@ -17,6 +17,7 @@ This docker image contain the Linux Dev channel Chromium (https://www.chromium.o
 ### Variables that can be set at run time
 
 | Variable | Default| 
+|----------|--------|
 | RMT_DBG_ADDR | 0.0.0.0 |
 | RMT_DBG_PORT | 9222 |
 | RMT_DBG_WIN_SIZE | "1920,1080" |
