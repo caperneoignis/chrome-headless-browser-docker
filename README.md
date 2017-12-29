@@ -21,7 +21,6 @@ This docker image contain the Linux Dev channel Chromium (https://www.chromium.o
 | RMT_DBG_ADDR | 0.0.0.0 |
 | RMT_DBG_PORT | 9222 |
 | RMT_DBG_WIN_SIZE | "1920,1080" |
-| APACHE_WEB_ROOT | /var/www/html |
 
 These variables can be set with the -e switch at run time, so you can get different settings for the chrome browser at run time.
 
@@ -31,9 +30,9 @@ To run the container with remote-debugging:
 ```
 docker run -d -p 9222:9222 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
 ```
-To run the container with remote-debugging and apache:
+To run the container with remote-debugging and different setting:
 ```
-docker run -d -p 9222:9222 -e APACHE_WEB_ROOT=/some/directory --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
+docker run -d -p 9222:9222 -e RMT_DBG_PORT=9223 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
 ```
 See the following sections for alternate ways to start the container.
 
