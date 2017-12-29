@@ -29,7 +29,7 @@ fi
 --remote-debugging-port=${RMT_DBG_PORT} \
 --no-sandbox \
 --window-size=${RMT_DBG_WIN_SIZE} \
-> ${APACHE_WEB_ROOT}/output.txt &
+&> ${APACHE_WEB_ROOT}/output.txt &
 
 if [[ $# -eq 1 && $1 == "bash" ]]; then
     $@
