@@ -46,6 +46,7 @@ RUN apt-get update && apt-get install -y \
 EXPOSE 9222
 
 #overwrite old configs with custom configs with export Document root
+#even though these files exist as is in the php image, I want to include them, so someone doesn't have to go to the other image and change those. 
 COPY configs/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 COPY configs/apache2.conf /etc/apache2/apache2.conf
 
