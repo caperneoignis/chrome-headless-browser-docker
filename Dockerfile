@@ -16,9 +16,7 @@
 # Base docker image
 FROM caperneoignis/moodle-php-apache:7.1
 
-ENV APACHE_WEB_ROOT="/var/www/html"
-
-LABEL name="chrome-headless" \ 
+LABEL name="chrome-headless with apache" \ 
 			maintainer="Lee K." \
 			version="1.4" \
 			description="Google Chrome Headless in a container"
@@ -34,7 +32,6 @@ RUN apt-get update && apt-get install -y \
 	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-get update && apt-get install -y \
 	google-chrome-stable \
-	supervisor \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -48,13 +45,19 @@ RUN apt-get update && apt-get install -y \
 # Expose port 9222
 EXPOSE 9222
 
-COPY files/supervisord.conf /etc/supervisord.conf
+#overwrite old configs with custom configs with export Document root
+COPY configs/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY configs/apache2.conf /etc/apache2/apache2.conf
 
 COPY files/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
 
+#overwrite old configs, then start php-entrypoint. followed by starting apache2 in the foreground
+ENTRYPOINT [ "/entrypoint.sh", "docker-php-entrypoint"]
+
+#set work directory to be the root system, since CI/CD like gitlab run from custom directory in build image. 
 WORKDIR /
 
-ENTRYPOINT [ "/entrypoint.sh", "bash"]
+CMD ["apache2-foreground"]
 
