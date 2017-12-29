@@ -6,12 +6,23 @@ umask 022
 if [[ "${APACHE_WEB_ROOT}" != "" ]]; then
     sed -i "s#<<APACHE_WEB_ROOT>>#${APACHE_WEB_ROOT}#" /etc/apache2/sites-enabled/000-default.conf
 	sed -i "s#%%APACHE_WEB_ROOT%%#${APACHE_WEB_ROOT}#" /etc/apache2/apache2.conf
+	sed -i "s#<<SERVER_NAME>>#${SERVER_NAME}#" /etc/apache2/apache2.conf
 else
     #set a default if one is not present
     APACHE_ROOT="/var/www/html"
     sed -i "s#<<APACHE_WEB_ROOT>>#${APACHE_ROOT}#" /etc/apache2/sites-enabled/000-default.conf
 	sed -i "s#%%APACHE_WEB_ROOT%%#${APACHE_ROOT}#" /etc/apache2/apache2.conf
+	sed -i "s#<<SERVER_NAME>>#${SERVER_NAME}#" /etc/apache2/apache2.conf
 fi
+
+if [[ "${SERVER_NAME}" != "" ]]; then
+	sed -i "s#<<SERVER_NAME>>#${SERVER_NAME}#" /etc/apache2/apache2.conf
+else
+    #set a default if one is not present
+    SERVER_NAME="TestServer"
+	sed -i "s#<<SERVER_NAME>>#${SERVER_NAME}#" /etc/apache2/apache2.conf
+fi
+
 if [[ "${RMT_DBG_ADDR}" == "" ]]; then
     RMT_DBG_ADDR=0.0.0.0
 fi
