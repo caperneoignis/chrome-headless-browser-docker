@@ -39,7 +39,8 @@ fi
 --remote-debugging-address=${RMT_DBG_ADDR} \
 --remote-debugging-port=${RMT_DBG_PORT} \
 --no-sandbox \
---window-size=${RMT_DBG_WIN_SIZE} > /dev/null 2>&1 &
+--window-size=${RMT_DBG_WIN_SIZE} \
+> /dev/null &
 
 if [[ $# -eq 1 && $1 == "bash" ]]; then
     $@
