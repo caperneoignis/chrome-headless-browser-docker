@@ -21,10 +21,7 @@ script:
   - VERSION1=`docker exec chrome1 google-chrome-stable --version | grep -Po '(?<=Google Chrome )[^ ]+'`
   - docker tag $REPO $REPO:${VERSION1}_apache
   - docker tag $REPO $REPO:latest_apache
-  - docker run --name chrome -e APACHE_WEB_ROOT -p 8000:80 -p 9222:9222 -d --cap-add=SYS_ADMIN $REPO:${VERSION1}_apache
-  #should get a response from both systems. 
-  - curl --fail http://127.0.0.1:8000/test.php
-  - curl --fail http://127.0.0.1:9222
+  - docker run --name chrome -e APACHE_WEB_ROOT -d --cap-add=SYS_ADMIN $REPO:${VERSION1}_apache
 
 after_success:
   - docker push $REPO;
