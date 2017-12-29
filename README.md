@@ -32,7 +32,7 @@ docker run -d -p 9222:9222 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-bro
 ```
 To run the container with remote-debugging and different setting:
 ```
-docker run -d -p 9222:9222 -e RMT_DBG_PORT=9223 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
+docker run -d -p 9223:9223 -e RMT_DBG_PORT=9223 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
 ```
 See the following sections for alternate ways to start the container.
 
