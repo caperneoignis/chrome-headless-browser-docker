@@ -42,10 +42,16 @@ RUN apt-get update && apt-get install -y \
 	&& apt-get purge --auto-remove -y curl gnupg \
 	&& rm -rf /var/lib/apt/lists/*
 
+RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \		
+    && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome		
+ 
+# Run Chrome non-privileged		 
+USER chrome
+
 # Expose port 9222
 EXPOSE 9222
-COPY files/entrypoint.sh /entrypoint.sh
 
-RUN chmod +x /entrypoint.sh
 # Autorun chrome headless with no GPU
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "google-chrome-stable" ]
+
+CMD [ "--headless", "--disable-gpu", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222"]

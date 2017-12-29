@@ -23,7 +23,7 @@ script:
   - VERSION1=`docker exec chrome1 google-chrome-stable --version | grep -Po '(?<=Google Chrome )[^ ]+'`
   - docker tag $REPO $REPO:latest
   - docker tag $REPO $REPO:$VERSION1
-  - docker run --name chrome -d --cap-add=SYS_ADMIN $REPO:latest --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
+  - docker run --name chrome -t --rm --cap-add=SYS_ADMIN $REPO:latest --headless --dump-dom http://info.cern.ch/hypertext/WWW/TheProject.html
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
@@ -32,4 +32,4 @@ after_success:
     fi
     
 after_script:
-  - docker stop chrome chrome0 chrome1 && docker rm chrome chrome0 chrome1
+  - docker stop chrome0 chrome1 && docker rm chrome0 chrome1
