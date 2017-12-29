@@ -18,7 +18,7 @@ FROM caperneoignis/moodle-php-apache:7.1
 
 LABEL name="chrome-headless with apache" \ 
 			maintainer="Lee K." \
-			version="1.4" \
+			version="1.5" \
 			description="Google Chrome Headless in a container"
 
 # Install deps + add Chrome Stable + purge all the things
@@ -27,10 +27,12 @@ RUN apt-get update && apt-get install -y \
 	ca-certificates \
 	curl \
   gnupg \
-	--no-install-recommends \
-	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
-	&& apt-get update && apt-get install -y \
+  git \
+	--no-install-recommends
+RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+	
+RUN apt-get update && apt-get install -y \
 	google-chrome-stable \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
