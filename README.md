@@ -30,9 +30,11 @@ To run the container with remote-debugging:
 ```
 docker run -d -p 9222:9222 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
 ```
-To run the container with remote-debugging and different setting:
+To run the container with remote-debugging and different setting when using with latest vs latest_apache tag:
 ```
-docker run -d -p 9223:9223 -e RMT_DBG_PORT=9223 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser
+docker run -d -p 9222:9222 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser:latest --no-sandbox --disable-gpu --dump-dom https://google.com
+
+docker run -d -p 9223:9223 -e RMT_DBG_PORT=9223 --cap-add=SYS_ADMIN caperneoignis/chrome-headless-browser:latest_apache
 ```
 See the following sections for alternate ways to start the container.
 
