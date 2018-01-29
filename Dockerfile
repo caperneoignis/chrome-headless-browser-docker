@@ -21,6 +21,11 @@ LABEL name="chrome-headless with apache" \
 			version="1.5" \
 			description="Google Chrome Headless in a container"
 
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
+//fixes issue with chrome and potentially speeds up system. 
+ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
+
 # Install deps + add Chrome Stable + purge all the things
 RUN apt-get update && apt-get install -y \
 	apt-transport-https \
@@ -38,14 +43,6 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
-# Add Chrome as a user
-#RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
-#    && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
-
-# Run Chrome non-privileged
-#USER chrome
-
-# Expose port 9222
 EXPOSE 9222
 
 #overwrite old configs with custom configs with export Document root
