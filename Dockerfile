@@ -23,7 +23,7 @@ LABEL name="chrome-headless with apache" \
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
-//fixes issue with chrome and potentially speeds up system. 
+#//fixes issue with chrome and potentially speeds up system. 
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 # Install deps + add Chrome Stable + purge all the things
