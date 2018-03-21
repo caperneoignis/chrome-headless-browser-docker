@@ -19,9 +19,9 @@ script:
   - docker run -d -e APACHE_WEB_ROOT --name chrome1 $REPO
   #we want the version information, so run the image then do an exec command
   - VERSION1=`docker exec chrome1 google-chrome-stable --version | grep -Po '(?<=Google Chrome )[^ ]+'`
-  - docker tag $REPO $REPO:${VERSION1}_apache_71
-  - docker tag $REPO $REPO:latest_apache_71
-  - docker run --name chrome -e APACHE_WEB_ROOT -d --cap-add=SYS_ADMIN $REPO:${VERSION1}_apache_71
+  - docker tag $REPO $REPO:${VERSION1}_apache_72
+  - docker tag $REPO $REPO:latest_apache_72
+  - docker run --name chrome -e APACHE_WEB_ROOT -d --cap-add=SYS_ADMIN $REPO:${VERSION1}_apache_72
 
 after_success:
   - docker push $REPO;

@@ -14,7 +14,7 @@
 #
 
 # Base docker image
-FROM caperneoignis/moodle-php-apache:7.1
+FROM caperneoignis/moodle-php-apache:7.2
 
 LABEL name="chrome-headless with apache" \ 
 			maintainer="Lee K." \
